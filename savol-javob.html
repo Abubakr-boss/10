@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>O‘tgan darsdan savol-javob</title><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head>
+<body>
+<header class="site-header"><a class="brand" href="index.html">TARIXIY MEROS</a><button class="menu-toggle" aria-label="Menyuni ochish">☰</button><nav class="nav"><a href="index.html">Bosh sahifa</a><a href="mashgulotlar.html">Aholi mashg‘ulotlari</a><a href="islohotlar.html">Moliya va soliqlar</a><a href="boshqaruv.html">Davlat boshqaruvi</a><a href="tashqi-siyosat.html">Tashqi siyosat</a><a class="active" href="savol-javob.html">Savol-javob</a></nav></header>
+<main><section class="page-hero"><p class="eyebrow">5-BO‘LIM</p><h1>O‘tgan darsdan savol-javob</h1><p>Savol ustiga bosing — javobi ochiladi. Bu bo‘lim test emas, takrorlash uchun.</p></section>
+<section class="content narrow"><div class="qa-toolbar"><span id="qa-count">18 ta savol</span><button class="secondary-button" id="toggle-all">Barchasini ochish</button></div><div id="qa-container"></div>
+<div class="page-actions"><a class="secondary-link" href="tashqi-siyosat.html">← Oldingi bo‘lim</a><a class="primary-link" href="index.html">Bosh sahifa →</a></div></section></main>
+<footer><span>ASHTARXONIYLAR DAVRI</span><span>Takrorlash bo‘limi</span></footer>
+<script>
+const questions = [
+["Shayboniylar davlat boshqaruvida qanday lavozimlar mavjud edi?","Otaliq, devonbegi, qushbegi, parvonachi, dodxoh, naqib, qozi, shayxulislom va boshqa lavozimlar mavjud edi."],
+["Shayboniylar davrida davlatning asosiy boshqaruv idorasi qanday atalgan?","Dargoh yoki oliy devon deb atalgan."],
+["Ashtarxoniylar davrida davlat boshqaruvi Shayboniylar davridan farq qilganmi?","Deyarli farq qilmagan. Dargoh asosiy boshqaruv idorasi bo‘lib qolgan."],
+["Otaliq lavozimining ahamiyati qanday o‘zgargan?","Otaliqning mahalliy boshqaruvdagi ahamiyati ortgan."],
+["Qushbegining vazifasi nima bo‘lgan?","Xonning ov qushlari va tozi itlariga mas’ul bo‘lgan. Keyinchalik mansabga tayinlash, unvon berish va yozma ko‘rsatmalar berish kabi imtiyozlarga ham ega bo‘lgan."],
+["Ashtarxoniylar Xuroson masalasida qaysi davlatlar bilan hisoblashgan?","Eron (Safaviylar) va Hindiston (Boburiylar) bilan."],
+["Safaviylar qaysi hududlarni egallashga intilgan?","Xurosonni egallagach, Balx va Buxoroni ham egallashga intilgan."],
+["Ashtarxoniylar Hindiston bilan qanday munosabatda bo‘lgan?","Do‘stona diplomatik va elchilik aloqalarini olib borgan."],
+["1657-yilda Abdulazizxon Hindistonga kimni elchi qilib yuborgan?","Naqshbandiya tariqati vakilini."],
+["1691-yilda Subhonqulixon huzuriga qaysi davlat elchisi kelgan?","Usmonli sultoni Ahmad II ning elchisi Mustafo kelgan."],
+["Mustafo qanday taklif bilan kelgan?","Eronga qarshi birgalikda kurashish taklifini olib kelgan."],
+["1671-yilda Moskvaga kim boshchiligida elchilik yuborilgan?","Mulla Farrux boshchiligida."],
+["Rossiya Buxoro savdogarlariga qanday to‘siqlar qo‘ygan?","Metall va undan yasalgan buyumlar kabi ayrim tovarlarni Rossiyadan olib chiqishni taqiqlagan."],
+["Florio Beneveni elchiligining asosiy vazifalaridan biri nima edi?","Buxoro oltini qayerdan va qancha miqdorda olinishini aniqlash hamda xonlikning harbiy va siyosiy holatini o‘rganish."],
+["Nima uchun Ashtarxoniylar uchun Xuroson muhim hudud hisoblangan?","Chunki Xuroson iqtisodiy va strategik jihatdan muhim bo‘lgan. Uni egallash Buxoro xonligining siyosiy qudratini oshirishi mumkin edi."],
+["Ashtarxoniylar nima sababdan Hindiston bilan yaxshi munosabatlarni saqlashga harakat qilgan?","Savdo va diplomatik aloqalarni rivojlantirish hamda Safaviylarga qarshi siyosiy ittifoq tuzish imkoniyati uchun."],
+["Rossiya elchilari Buxoro haqida qanday ma’lumotlar to‘plagan?","Xonlik hududi, karvon yo‘llari, shaharlari, iqtisodiyoti, aholisi va harbiy holati haqida."],
+["Florio Beneveni elchiligi nima uchun muhim bo‘lgan?","Chunki u savdo aloqalaridan tashqari Rossiyaning siyosiy, harbiy va iqtisodiy manfaatlarini ham ko‘zlagan."]
+];
+const container = document.getElementById("qa-container");
+questions.forEach((item, index) => {
+  const box = document.createElement("article");
+  box.className = "qa-item";
+  const button = document.createElement("button");
+  button.className = "qa-question";
+  button.innerHTML = `<span class="qa-number">${index+1}.</span><span class="qa-text"></span><span class="qa-arrow">+</span>`;
+  button.querySelector(".qa-text").textContent = item[0];
+  const answer = document.createElement("div");
+  answer.className = "qa-answer";
+  answer.textContent = "Javob: " + item[1];
+  button.addEventListener("click", () => {
+    box.classList.toggle("open");
+    button.querySelector(".qa-arrow").textContent = box.classList.contains("open") ? "−" : "+";
+  });
+  box.append(button, answer);
+  container.append(box);
+});
+document.getElementById("toggle-all").addEventListener("click", function() {
+  const boxes = [...document.querySelectorAll(".qa-item")];
+  const shouldOpen = boxes.some(box => !box.classList.contains("open"));
+  boxes.forEach(box => {
+    box.classList.toggle("open", shouldOpen);
+    box.querySelector(".qa-arrow").textContent = shouldOpen ? "−" : "+";
+  });
+  this.textContent = shouldOpen ? "Barchasini yopish" : "Barchasini ochish";
+});
+</script></body></html>
